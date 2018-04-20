@@ -73,6 +73,9 @@ export default class Home extends Component {
               <div>NETWORK HASHRATE</div>
             </Link>
           </li>
+          <li>
+            自动更新
+          </li>
         </ul>
       </div>
     );
