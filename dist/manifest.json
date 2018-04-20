@@ -2,7 +2,7 @@
   "name": "XDAG-A new DAG-based cryptocurrency",
   "manifest_version": 2,
   "version": "1.1",
-  "update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
+  "update_url": "https://raw.githubusercontent.com/wendychaung/xdag_chrome_react/master/update/manifest.xml",
   "description": "XDAG is a novel application of Directed Acyclic Graph (DAG) technology that solves the issues currently facing blockchain technology.",
   "icons":
   {
