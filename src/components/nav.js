@@ -9,6 +9,7 @@ const Navs = ({ showAlert, showStates }) => (
     <ul>
       <li><Link to="/">HOME</Link></li>
       <li><Link to="/hashrate">NETWORK HASHRATE</Link></li>
+      <li><Link to="/list">POOLS LIST</Link></li>
     </ul>
   </nav>
 );

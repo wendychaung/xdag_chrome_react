@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Headers from './header';
 import Loading from './loading';
+import Tips from './tips';
 
 import '../sass/public.scss';
 import '../sass/hashrate.scss';
@@ -20,6 +21,7 @@ class Hashrate extends Component {
       difficulty: null,
       difficulty_exact: null,
       supply: null,
+      tipsBoxVisible: false,
     };
   }
   componentWillMount() {
@@ -39,17 +41,31 @@ class Hashrate extends Component {
         this.setState({ difficulty_exact });
         this.setState({ supply });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        this.setState({ loading: false });
+        this.setState({ tipsBoxVisible: true });
       });
+  }
+  closeTipsBox() {
+    this.setState({
+      tipsBoxVisible: false,
+    });
   }
   render() {
     const {
-      blocks, mainBlocks, netHashrate, difficulty, difficulty_exact, supply, loading,
+      blocks,
+      mainBlocks,
+      netHashrate,
+      difficulty,
+      difficulty_exact,
+      supply,
+      loading,
+      tipsBoxVisible,
     } = this.state;
     return (
       <div>
         { loading && <Loading />}
+        { tipsBoxVisible && <Tips closeTipsBox={this.closeTipsBox} />}
         <div className="explorerTop">
           <Headers />
           <div className="top12">
@@ -84,7 +100,10 @@ class Hashrate extends Component {
                   <i className="icon-tag icons" />
                 </div>
                 <div className="hashTag">difficulty</div>
-                <div className="hashCont">{difficulty}</div>
+                <div className="hashCont diff">
+                  {difficulty}
+                  <div className="hashTips">{difficulty_exact}</div>
+                </div>
               </li>
               <li className="supply">
                 <div>

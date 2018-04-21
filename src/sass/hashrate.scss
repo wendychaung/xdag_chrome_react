@@ -101,6 +101,26 @@
     .hashCont{
       font-size: 20px;
       color: #666!important;
+      &.diff{
+        cursor: pointer;
+        position: relative;
+      }
+      &:hover{
+        .hashTips{
+          display: block;
+        }
+      }
+      .hashTips{
+        display: none;
+        font-size: 14px;
+        padding: 5px 8px;
+        background: #f8f8f8;
+        box-shadow: 0 0 6px #ddd;
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space:nowrap;
+      }
     }
   }
 }

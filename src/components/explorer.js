@@ -4,6 +4,7 @@ import Page from './page';
 
 import Headers from './header';
 import Loading from './loading';
+import Tips from './tips';
 
 import '../sass/public.scss';
 import '../sass/explorer.scss';
@@ -17,8 +18,9 @@ class Explorer extends Component {
     this.pageClick = this.pageClick.bind(this);
     this.goPrevClick = this.goPrevClick.bind(this);
     this.goNext = this.goNext.bind(this);
+    this.closeTipsBox = this.closeTipsBox.bind(this);
     this.state = {
-      loading: true,
+      loading: null,
       balance: null,
       time: null,
       difficulty: null,
@@ -28,16 +30,19 @@ class Explorer extends Component {
       datas: [],
       cur: 1,
       total: null,
+      tipsBoxVisible: false,
     };
   }
   componentWillMount() {
     this.initData(this.cur);
   }
   initData(page) {
+    this.setState({ loading: true });
     axios.get('https://xdag.top/api/blocks', {
       params: {
         address: this.props.match.params.address,
         page,
+        per_page: 10,
       },
     })
       .then((response) => {
@@ -57,15 +62,20 @@ class Explorer extends Component {
         this.setState({ cur: address.current_page });
         this.setState({ total: address.last_page });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        this.setState({ loading: false });
+        this.setState({ tipsBoxVisible: true });
       });
+  }
+  closeTipsBox() {
+    this.setState({
+      tipsBoxVisible: false,
+    });
   }
   pageClick(pageNum) {
     const num = parseInt(pageNum, 10);
     if (num !== this.state.cur) {
       this.setState({ cur: num }, () => {
-        this.state.datas = [];
         this.initData(this.state.cur);
       });
     }
@@ -86,12 +96,23 @@ class Explorer extends Component {
   }
   render() {
     const {
-      balance, time, difficulty, direction, addressTP, amount, datas, cur, total, loading,
+      balance,
+      time,
+      difficulty,
+      direction,
+      addressTP,
+      amount,
+      datas,
+      cur,
+      total,
+      loading,
+      tipsBoxVisible,
     } = this.state;
     return (
       <div>
         { loading && <Loading />}
-        <div className="explorerTop">
+        { tipsBoxVisible && <Tips closeTipsBox={this.closeTipsBox} />}
+        <div className="explorerTop2">
           <Headers />
           <div className="top12">
             <div className="balance">BALANCE</div>
@@ -131,14 +152,14 @@ class Explorer extends Component {
                 </dl>
               ))
             }
-            <Page
-              current={cur}
-              totalPage={total}
-              pageClick={this.pageClick}
-              goPrev={this.goPrevClick}
-              goNext={this.goNext}
-            />
           </div>
+          <Page
+            current={cur}
+            totalPage={total}
+            pageClick={this.pageClick}
+            goPrev={this.goPrevClick}
+            goNext={this.goNext}
+          />
         </div>
       </div>
     );

@@ -1,50 +1,30 @@
 .paginationDiv {
-  display: block;
+  display:inline-block;
+  margin: 20px 0;
   color: #666;
-  line-height: 29px;
   text-align: center;
-  margin: 0 auto;
-  font-size: 14px;
-  a {
-    padding: 0 7px;
+  height: 30px;
+  span{
+    padding: 5px 12px;
     vertical-align: middle;
     text-decoration: none;
     cursor: pointer;
-    display: inline-block;
-  }
-  .next,.prev {
-    background-color: #f3f4f8;
-    border: 1px solid #e5e5e5;
-    line-height: 31px;
-    height: 29px;
-    overflow: hidden;
-    vertical-align: middle;
-    padding: 0 10px;
-    &:hover{
-      background-color: #ddd;
-      border: 1px solid #ddd;
-    }
-    &.disable{
-      background-color: #f3f4f8;
-      border-color: #e5e5e5;
-      color: #ddd;
-      cursor: no-drop;
-    }
-  }
-  .next{ margin-left: -1px;}
-  .nums {
-    margin-left: -1px;
-    padding: 0 11px;
-    border: 1px solid #e5e5e5;
-    color: #666 ;
+    border: 1px solid #D2DAE2;
+    margin: 0 4px;
     &.current{
-      background-color: #4c7bc2;
-      border-color: #4c7bc2;
-      color: #fff ;
+      border: 1px solid #4D93F7!important;
+      color: #4D93F7!important;
     }
-    &:hover {
-      background-color: #ddd;
-      border-color: #ddd;
-      color: #666 }
+  }
+  .disable{
+    border-color: #e5e5e5;
+    cursor: no-drop;
+  }
+  .ell{
+    border: 0;
+    padding: 5px;
+  }
+  .noShowP{
+    display: none;
   }
 }

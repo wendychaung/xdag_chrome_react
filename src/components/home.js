@@ -44,7 +44,7 @@ export default class Home extends Component {
           <div>
             <input
               type="text"
-              placeholder="ADDRESS / BLOCK HASH"
+              placeholder="PLEASE INPUT ADDRESS"
               id="address"
               name="address"
               onChange={this.handlechange}
@@ -62,10 +62,10 @@ export default class Home extends Component {
             </a>
           </li>
           <li>
-            <a href="http://xdag.io/index.html#services" target="_blank" rel="noreferrer noopener">
+            <Link to="/list" >
               <div><i className="icon-basket-loaded icons" /></div>
-              <div>MINING</div>
-            </a>
+              <div>POOL<br /> LIST</div>
+            </Link>
           </li>
           <li>
             <Link to="/hashrate" >

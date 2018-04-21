@@ -2,6 +2,13 @@
 
 @import "~dmocho-line-icons/scss/simple-line-icons";
 
+.explorerTop2{
+  width: 100%;
+  height: 300px;
+  background: url("../images/explorer_top.png");
+  color: $fontColor;
+
+}
 
 .transaction{
   background: #ededed;
@@ -95,7 +102,6 @@
       }
       &.output{
         background: #26e3e5;
-
       }
     }
   }
