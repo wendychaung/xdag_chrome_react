@@ -9,7 +9,7 @@ const Navs = ({ showAlert, showStates }) => (
     <ul>
       <li><Link to="/">HOME</Link></li>
       <li><Link to="/hashrate">NETWORK HASHRATE</Link></li>
-      <li><Link to="/list">POOLS LIST</Link></li>
+      <li><a href="https://xdag.io/pools" target="_blank" rel="noreferrer noopener">POOLS LIST</a></li>
     </ul>
   </nav>
 );

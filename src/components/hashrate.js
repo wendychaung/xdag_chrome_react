@@ -15,12 +15,12 @@ class Hashrate extends Component {
     this.initData = this.initData.bind(this);
     this.state = {
       loading: true,
-      blocks: null,
-      mainBlocks: null,
-      netHashrate: null,
+			network_blocks: null,
+			network_main_blocks: null,
+      network_hashrate: null,
       difficulty: null,
       difficulty_exact: null,
-      supply: null,
+			network_supply: null,
       tipsBoxVisible: false,
     };
   }
@@ -28,18 +28,18 @@ class Hashrate extends Component {
     this.initData(this.cur);
   }
   initData() {
-    axios.get('https://xdag.top/api/state')
+    axios.get('http://xdagscan.com/api/explorer/index')
       .then((response) => {
         const {
-          blocks, mainBlocks, netHashrate, difficulty, difficulty_exact, supply,
-        } = response.data;
+          network_blocks, network_main_blocks, network_hashrate, difficulty, difficulty_exact, network_supply,
+        } = response.data.data;
         this.setState({ loading: false });
-        this.setState({ blocks });
-        this.setState({ mainBlocks });
-        this.setState({ netHashrate });
+        this.setState({ network_blocks });
+        this.setState({ network_main_blocks });
+        this.setState({ network_hashrate });
         this.setState({ difficulty });
         this.setState({ difficulty_exact });
-        this.setState({ supply });
+        this.setState({ network_supply });
       })
       .catch(() => {
         this.setState({ loading: false });
@@ -53,12 +53,12 @@ class Hashrate extends Component {
   }
   render() {
     const {
-      blocks,
-      mainBlocks,
-      netHashrate,
+			network_blocks,
+			network_main_blocks,
+      network_hashrate,
       difficulty,
       difficulty_exact,
-      supply,
+			network_supply,
       loading,
       tipsBoxVisible,
     } = this.state;
@@ -72,8 +72,8 @@ class Hashrate extends Component {
             <div className="netHashrate">
               <div>NETHASHRATE</div>
               <div className="numH">
-                <div>{netHashrate && netHashrate.split(' ')[0]}</div>
-                <div className="unit">{netHashrate && 'TH/s'}</div>
+                <div>{network_hashrate && network_hashrate.split(' ')[0]}</div>
+                <div className="unit">{network_hashrate && 'TH/s'}</div>
               </div>
             </div>
           </div>
@@ -86,23 +86,22 @@ class Hashrate extends Component {
                   <i className="icon-layers icons" />
                 </div>
                 <div className="hashTag">blocks</div>
-                <div className="hashCont">{blocks}</div>
+                <div className="hashCont">{network_blocks}</div>
               </li>
               <li className="main">
                 <div>
                   <i className="icon-puzzle icons" />
                 </div>
                 <div className="hashTag">mainBlocks</div>
-                <div className="hashCont">{mainBlocks}</div>
+                <div className="hashCont">{network_main_blocks}</div>
               </li>
               <li className="difficulty">
                 <div>
                   <i className="icon-tag icons" />
                 </div>
-                <div className="hashTag">difficulty</div>
+                <div className="hashTag">Hashrate Chart</div>
                 <div className="hashCont diff">
-                  {difficulty}
-                  <div className="hashTips">{difficulty_exact}</div>
+									<a href="http://xdagscan.com/index.html" target="_blank" rel="noreferrer noopener">more &gt; &gt;</a>
                 </div>
               </li>
               <li className="supply">
@@ -110,7 +109,7 @@ class Hashrate extends Component {
                   <i className="icon-present icons" />
                 </div>
                 <div className="hashTag">supply</div>
-                <div className="hashCont">{supply && (supply.split(':')[1]).split(' ')[1]}</div>
+                <div className="hashCont">{network_supply && network_supply.split(' ')[0]}</div>
               </li>
             </ul>
           </div>

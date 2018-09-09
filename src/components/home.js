@@ -62,19 +62,16 @@ export default class Home extends Component {
             </a>
           </li>
           <li>
-            <Link to="/list" >
+            <a href="https://xdag.io/pools" target="_blank" rel="noreferrer noopener" >
               <div><i className="icon-basket-loaded icons" /></div>
               <div>POOL<br /> LIST</div>
-            </Link>
+            </a>
           </li>
           <li>
             <Link to="/hashrate" >
               <div><i className="icon-calculator icons" /></div>
               <div>NETWORK HASHRATE</div>
             </Link>
-          </li>
-          <li>
-            自动更新
           </li>
         </ul>
       </div>

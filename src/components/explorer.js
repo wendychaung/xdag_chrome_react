@@ -38,29 +38,27 @@ class Explorer extends Component {
   }
   initData(page) {
     this.setState({ loading: true });
-    axios.get('https://xdag.top/api/blocks', {
+    axios.get('http://xdagscan.com/api/explorer/detail', {
       params: {
         address: this.props.match.params.address,
-        page,
-        per_page: 10,
+				pageno: page,
+				pagesize: 10,
       },
     })
       .then((response) => {
         this.setState({ loading: false });
         const {
-          balance, time, difficulty, transaction, address,
-        } = response.data;
+          balance, time, difficulty, transaction, address_list,
+        } = response.data.data;
         if (parseInt(this.state.cur, 10) === 1) {
           this.setState({ balance });
           this.setState({ time });
           this.setState({ difficulty });
-          this.setState({ direction: transaction.data[0].direction });
-          this.setState({ addressTP: transaction.data[0].address });
-          this.setState({ amount: transaction.data[0].amount });
+          this.setState({ direction: transaction[0].direction });
+          this.setState({ addressTP: transaction[0].address });
+          this.setState({ amount: transaction[0].amount });
         }
-        this.setState({ datas: address.data });
-        this.setState({ cur: address.current_page });
-        this.setState({ total: address.last_page });
+        this.setState({ datas: address_list });
       })
       .catch(() => {
         this.setState({ loading: false });
@@ -90,7 +88,8 @@ class Explorer extends Component {
 
   goNext() {
     const cur = parseInt(this.state.cur, 10);
-    if (cur < this.state.total) {
+    console.log()
+    if (this.state.datas) {
       this.pageClick(cur + 1);
     }
   }
@@ -141,7 +140,7 @@ class Explorer extends Component {
             {
               datas.map(d => (
                 <dl key={d.address + d.time + d.amount}>
-                  <dt><a href={'http://explorer.xdag.io/block/' + d.address} target="_blank" >{d.address}</a></dt>
+                  <dt><a href={'http://xdagscan.com/blockDetails.html?address=' + d.address} target="_blank" >{d.address}</a></dt>
                   <dd>
                     <ul>
                       <li className="input">{d.direction}</li>
